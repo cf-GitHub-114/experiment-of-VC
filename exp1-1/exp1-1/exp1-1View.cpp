@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(Cexp11View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp11View, CView)
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // Cexp11View 构造/析构
@@ -46,7 +47,7 @@ BOOL Cexp11View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp11View 绘制
 
-void Cexp11View::OnDraw(CDC* /*pDC*/)
+void Cexp11View::OnDraw(CDC* pDC)
 {
 	Cexp11Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -79,3 +80,14 @@ Cexp11Doc* Cexp11View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp11View 消息处理程序
+
+
+void Cexp11View::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	Cexp11Doc* pDoc = GetDocument();
+	CClientDC dc(this);	
+	dc.TextOutW(200, 200, pDoc->s);
+
+	CView::OnLButtonDown(nFlags, point);
+}

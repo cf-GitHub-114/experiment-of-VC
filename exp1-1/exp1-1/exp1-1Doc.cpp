@@ -30,6 +30,7 @@ END_MESSAGE_MAP()
 Cexp11Doc::Cexp11Doc()
 {
 	// TODO: 在此添加一次性构造代码
+	s = "陈斐";
 
 }
 

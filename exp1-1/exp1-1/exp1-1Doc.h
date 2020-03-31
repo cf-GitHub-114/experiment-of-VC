@@ -27,6 +27,8 @@ public:
 	virtual void OnDrawThumbnail(CDC& dc, LPRECT lprcBounds);
 #endif // SHARED_HANDLERS
 
+
+
 // й╣ож
 public:
 	virtual ~Cexp11Doc();
@@ -34,6 +36,8 @@ public:
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
 #endif
+
+	CString s;
 
 protected:
 
