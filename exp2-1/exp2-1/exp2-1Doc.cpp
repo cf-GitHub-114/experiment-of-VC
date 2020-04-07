@@ -1,15 +1,15 @@
 
-// exp1-1Doc.cpp : Cexp11Doc 类的实现
+// exp2-1Doc.cpp : Cexp21Doc 类的实现
 //
 
 #include "stdafx.h"
 // SHARED_HANDLERS 可以在实现预览、缩略图和搜索筛选器句柄的
 // ATL 项目中进行定义，并允许与该项目共享文档代码。
 #ifndef SHARED_HANDLERS
-#include "exp1-1.h"
+#include "exp2-1.h"
 #endif
 
-#include "exp1-1Doc.h"
+#include "exp2-1Doc.h"
 
 #include <propkey.h>
 
@@ -17,28 +17,27 @@
 #define new DEBUG_NEW
 #endif
 
-// Cexp11Doc
+// Cexp21Doc
 
-IMPLEMENT_DYNCREATE(Cexp11Doc, CDocument)
+IMPLEMENT_DYNCREATE(Cexp21Doc, CDocument)
 
-BEGIN_MESSAGE_MAP(Cexp11Doc, CDocument)
+BEGIN_MESSAGE_MAP(Cexp21Doc, CDocument)
 END_MESSAGE_MAP()
 
 
-// Cexp11Doc 构造/析构
+// Cexp21Doc 构造/析构
 
-Cexp11Doc::Cexp11Doc()
+Cexp21Doc::Cexp21Doc()
 {
 	// TODO: 在此添加一次性构造代码
-	s = "陈斐";    //初始化字符串s
 
 }
 
-Cexp11Doc::~Cexp11Doc()
+Cexp21Doc::~Cexp21Doc()
 {
 }
 
-BOOL Cexp11Doc::OnNewDocument()
+BOOL Cexp21Doc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
 		return FALSE;
@@ -52,9 +51,9 @@ BOOL Cexp11Doc::OnNewDocument()
 
 
 
-// Cexp11Doc 序列化
+// Cexp21Doc 序列化
 
-void Cexp11Doc::Serialize(CArchive& ar)
+void Cexp21Doc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
@@ -69,7 +68,7 @@ void Cexp11Doc::Serialize(CArchive& ar)
 #ifdef SHARED_HANDLERS
 
 // 缩略图的支持
-void Cexp11Doc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
+void Cexp21Doc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 {
 	// 修改此代码以绘制文档数据
 	dc.FillSolidRect(lprcBounds, RGB(255, 255, 255));
@@ -90,7 +89,7 @@ void Cexp11Doc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 }
 
 // 搜索处理程序的支持
-void Cexp11Doc::InitializeSearchContent()
+void Cexp21Doc::InitializeSearchContent()
 {
 	CString strSearchContent;
 	// 从文档数据设置搜索内容。
@@ -100,7 +99,7 @@ void Cexp11Doc::InitializeSearchContent()
 	SetSearchContent(strSearchContent);
 }
 
-void Cexp11Doc::SetSearchContent(const CString& value)
+void Cexp21Doc::SetSearchContent(const CString& value)
 {
 	if (value.IsEmpty())
 	{
@@ -120,19 +119,19 @@ void Cexp11Doc::SetSearchContent(const CString& value)
 
 #endif // SHARED_HANDLERS
 
-// Cexp11Doc 诊断
+// Cexp21Doc 诊断
 
 #ifdef _DEBUG
-void Cexp11Doc::AssertValid() const
+void Cexp21Doc::AssertValid() const
 {
 	CDocument::AssertValid();
 }
 
-void Cexp11Doc::Dump(CDumpContext& dc) const
+void Cexp21Doc::Dump(CDumpContext& dc) const
 {
 	CDocument::Dump(dc);
 }
 #endif //_DEBUG
 
 
-// Cexp11Doc 命令
+// Cexp21Doc 命令

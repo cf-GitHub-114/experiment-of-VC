@@ -85,9 +85,9 @@ Cexp11Doc* Cexp11View::GetDocument() const // 非调试版本是内联的
 void Cexp11View::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	Cexp11Doc* pDoc = GetDocument();
-	CClientDC dc(this);	
-	dc.TextOutW(200, 200, pDoc->s);
+	Cexp11Doc* pDoc = GetDocument();//要调用Doc类中的成员，所以从Ondraw函数中copy过来
+	CClientDC dc(this);	//定义一个CClientDC的对象dc，画图必用到CDC类对象（因在设备环境中）
+	dc.TextOutW(200, 200, pDoc->s);//输出Doc类中定义的字符串
 
 	CView::OnLButtonDown(nFlags, point);
 }

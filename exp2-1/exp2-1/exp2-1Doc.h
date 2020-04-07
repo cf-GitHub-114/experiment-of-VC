@@ -1,16 +1,16 @@
 
-// exp1-1Doc.h : Cexp11Doc 类的接口
+// exp2-1Doc.h : Cexp21Doc 类的接口
 //
 
 
 #pragma once
 
 
-class Cexp11Doc : public CDocument
+class Cexp21Doc : public CDocument
 {
 protected: // 仅从序列化创建
-	Cexp11Doc();
-	DECLARE_DYNCREATE(Cexp11Doc)
+	Cexp21Doc();
+	DECLARE_DYNCREATE(Cexp21Doc)
 
 // 特性
 public:
@@ -29,13 +29,11 @@ public:
 
 // 实现
 public:
-	virtual ~Cexp11Doc();
+	virtual ~Cexp21Doc();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
 #endif
-
-	CString s;//声明字符串s
 
 protected:
 
