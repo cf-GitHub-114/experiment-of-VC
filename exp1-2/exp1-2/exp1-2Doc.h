@@ -35,7 +35,7 @@ public:
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
-int count;//声明变量count
+int count;    //声明变量count
 
 protected:
 

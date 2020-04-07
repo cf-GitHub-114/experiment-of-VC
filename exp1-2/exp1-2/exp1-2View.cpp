@@ -85,9 +85,9 @@ Cexp12Doc* Cexp12View::GetDocument() const // 非调试版本是内联的
 void Cexp12View::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	Cexp12Doc* pDoc = GetDocument();
-	ASSERT_VALID(pDoc);
-	pDoc->count++;
+	Cexp12Doc* pDoc = GetDocument();//因要调用另一个类Doc类中的数据成员，在Ondraw中copy过来
+	//ASSERT_VALID(pDoc);//经编译运行，可无
+	pDoc->count++;  //使每点击一下鼠标，count值加一
 	CView::OnLButtonDown(nFlags, point);
 }
 
@@ -95,12 +95,12 @@ void Cexp12View::OnLButtonDown(UINT nFlags, CPoint point)
 void Cexp12View::OnRButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	Cexp12Doc* pDoc = GetDocument();
-	ASSERT_VALID(pDoc);
-	int a = pDoc->count;
-	CString s;
-	s.Format(_T("%d"), a);
-	CClientDC dc(this);
-	dc.TextOutW(600, 300, s);
+	Cexp12Doc* pDoc = GetDocument();//因要调用另一个类Doc类中的数据成员，在Ondraw中copy过来
+	//ASSERT_VALID(pDoc);
+	int a = pDoc->count;//定义一个整型变量获取Doc中的count值
+	CString s; //定义一个字符串s
+	s.Format(_T("%d"), a);//将整型数据a转化为字符串并赋给s
+	CClientDC dc(this);//定义一个CClientDC的对象dc
+	dc.TextOutW(600, 300, s);//输出字符串s
 	CView::OnRButtonDown(nFlags, point);
 }

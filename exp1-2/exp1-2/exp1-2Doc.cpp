@@ -30,7 +30,7 @@ END_MESSAGE_MAP()
 Cexp12Doc::Cexp12Doc()
 {
 	// TODO: 在此添加一次性构造代码
-	count = 0;//初始化变量count
+	count = 0;    //初始化变量count
 
 }
 
