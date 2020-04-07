@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(Cexp13View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp13View, CView)
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // Cexp13View 构造/析构
@@ -29,6 +30,7 @@ END_MESSAGE_MAP()
 Cexp13View::Cexp13View()
 {
 	// TODO: 在此处添加构造代码
+	s2 = "吃饭睡觉玩手机";
 
 }
 
@@ -79,3 +81,15 @@ Cexp13Doc* Cexp13View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp13View 消息处理程序
+
+
+void Cexp13View::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	Cexp13Doc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	CClientDC dc(this);
+	dc.TextOutW(300, 300,pDoc->s1+s2 );
+	//CString s3 = "study";   //此句是错误的
+	CView::OnLButtonDown(nFlags, point);
+}

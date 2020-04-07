@@ -30,6 +30,7 @@ END_MESSAGE_MAP()
 Cexp13Doc::Cexp13Doc()
 {
 	// TODO: 在此添加一次性构造代码
+	s1 = "我喜欢";
 
 }
 
