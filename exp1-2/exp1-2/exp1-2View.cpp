@@ -101,6 +101,6 @@ void Cexp12View::OnRButtonDown(UINT nFlags, CPoint point)
 	CString s;
 	s.Format(_T("%d"), a);
 	CClientDC dc(this);
-	dc.TextOutW(200, 400, s);
+	dc.TextOutW(600, 300, s);
 	CView::OnRButtonDown(nFlags, point);
 }
