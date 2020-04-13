@@ -46,7 +46,7 @@ BOOL Cexp21View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp21View 绘制
 
-void Cexp21View::OnDraw(CDC* /*pDC*/)
+void Cexp21View::OnDraw(CDC* pDC)
 {
 	Cexp21Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +54,14 @@ void Cexp21View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	CString s;     //声明字符串s
+	s = "我是学生";   //初始化字符串s
+	int A;    //声明整型数据A
+	A = 123;   //初始化整型数据A
+	pDC->TextOut(200, 200, s);//输出字符串s
+	CString s1;//定义一个字符串s1，用来输出整型数据A
+	s1.Format(_T("%d"),A);//将整型数据转换为CString字符串
+	pDC->TextOut(200, 300, s1);//将字符串输出
 }
 
 
