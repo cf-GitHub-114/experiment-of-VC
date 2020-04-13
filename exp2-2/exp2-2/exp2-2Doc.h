@@ -34,6 +34,9 @@ public:
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
 #endif
+	CString s, s1;//定义字符串
+	int A;//定义整型变量
+	
 
 protected:
 

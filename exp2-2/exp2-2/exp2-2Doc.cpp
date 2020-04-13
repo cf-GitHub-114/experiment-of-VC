@@ -30,7 +30,10 @@ END_MESSAGE_MAP()
 Cexp22Doc::Cexp22Doc()
 {
 	// TODO: 在此添加一次性构造代码
-
+	//s = _T("我是***");
+	s = "我是***";//初始化字符串s
+	A = 123;//初始化整型数据A
+	s1.Format(_T("%d"),A);//将整型变量A转化为字符串
 }
 
 Cexp22Doc::~Cexp22Doc()

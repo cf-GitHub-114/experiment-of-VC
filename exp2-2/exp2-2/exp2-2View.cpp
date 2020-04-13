@@ -46,7 +46,7 @@ BOOL Cexp22View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp22View 绘制
 
-void Cexp22View::OnDraw(CDC* /*pDC*/)
+void Cexp22View::OnDraw(CDC* pDC)
 {
 	Cexp22Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +54,8 @@ void Cexp22View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	pDC->TextOutW(200,200,pDoc->s);
+	pDC->TextOutW(200, 300, pDoc->s1);
 }
 
 
