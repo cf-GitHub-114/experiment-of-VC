@@ -34,6 +34,7 @@ public:
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
 #endif
+	int A, B;//定义两个int类型数据变量
 
 protected:
 

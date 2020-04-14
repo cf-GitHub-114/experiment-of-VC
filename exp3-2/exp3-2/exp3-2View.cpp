@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(Cexp32View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp32View, CView)
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // Cexp32View 构造/析构
@@ -79,3 +80,17 @@ Cexp32Doc* Cexp32View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp32View 消息处理程序
+
+
+void Cexp32View::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	Cexp32Doc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	CString s;//定义字符串变量s
+	s = "A+B=3";//初始化变量s
+	CClientDC dc(this);//定义CClientDC的对象dc
+	dc.TextOutW(200, 200, s);//在指定位置（200,200）输出字符串
+
+	CView::OnLButtonDown(nFlags, point);
+}

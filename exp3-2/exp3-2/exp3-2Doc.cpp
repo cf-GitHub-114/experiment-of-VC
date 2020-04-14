@@ -30,7 +30,8 @@ END_MESSAGE_MAP()
 Cexp32Doc::Cexp32Doc()
 {
 	// TODO: 在此添加一次性构造代码
-
+	A = 1;//初始化变量A
+	B = 2;//初始化变量B
 }
 
 Cexp32Doc::~Cexp32Doc()
