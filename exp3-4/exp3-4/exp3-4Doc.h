@@ -14,7 +14,9 @@ protected: // 仅从序列化创建
 
 // 特性
 public:
-
+	CArray<CRect,CRect&>ju;//定义一个元素为矩形的数组
+	int a, b;//定义两个整型变量
+	int count;//定义整型变量count，用于计算在矩形D中点击的次数
 // 操作
 public:
 

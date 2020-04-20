@@ -30,6 +30,18 @@ END_MESSAGE_MAP()
 Cexp34Doc::Cexp34Doc()
 {
 	// TODO: 在此添加一次性构造代码
+	ju.SetSize(10);
+	CRect A(0, 0, 60, 100);//构造矩形A
+	CRect B(100, 100, 200, 200);//构造矩形B
+	CRect C(200, 250, 300, 400);//构造矩形C
+	CRect D(400, 400,500, 600);//构造矩形D
+    ju.Add(A);
+	ju.Add(B);
+	ju.Add(C);
+	ju.Add(D);
+	a = rand();//定义一个随机数
+	b = rand();//定义一个随机数
+	count = 0;//初始化count
 
 }
 

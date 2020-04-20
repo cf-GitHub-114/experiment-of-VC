@@ -22,6 +22,8 @@
 IMPLEMENT_DYNCREATE(Cexp34View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp34View, CView)
+	ON_WM_LBUTTONDOWN()
+	ON_WM_RBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // Cexp34View 构造/析构
@@ -46,7 +48,7 @@ BOOL Cexp34View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp34View 绘制
 
-void Cexp34View::OnDraw(CDC* /*pDC*/)
+void Cexp34View::OnDraw(CDC* pDC)
 {
 	Cexp34Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +56,9 @@ void Cexp34View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	for (int i = 0;i < pDoc->ju.GetSize();i++) {
+		pDC->Rectangle(pDoc->ju.GetAt(i));
+	}
 }
 
 
@@ -79,3 +84,89 @@ Cexp34Doc* Cexp34View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp34View 消息处理程序
+
+
+void Cexp34View::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	Cexp34Doc* pDoc = GetDocument();
+	CClientDC dc(this);//定义一个CClientDC的对象dc		
+	CString s1;
+	if (point.x > 0 && point.x < 60 && point.y > 0 && point.y < 100) {//在矩形A中的情况
+		s1.Format(_T("%d"), pDoc->a);
+		dc.TextOutW(point.x, point.y, s1);
+	}               //pDoc->ju[1].PtInRect(point)和Doc->ju.GetAt(1).PtInRect(point)均不可用
+	else if (point.x > 100 && point.x < 200 && point.y > 100 && point.y < 200) {//在矩形B中的情况
+		s1.Format(_T("%d"), pDoc->b);
+		dc.TextOutW(point.x, point.y, s1);
+	}
+	else if (point.x > 400 && point.x < 500 && point.y > 400 && point.y < 600) {//在矩形D中的情况
+	    int count = ++pDoc->count;
+		CString ss1;
+		switch (count) {
+		case 1:    //用‘1’不行
+			ss1 = "+";
+			dc.TextOutW(450, 410, ss1);
+			break;
+		case 2:
+			ss1 = "-";
+			dc.TextOutW(450, 430, ss1);
+			break;
+		case 3:
+			ss1 = "*";
+			dc.TextOutW(450, 450, ss1);
+			break;
+		case 4:
+			ss1 = "/";
+			dc.TextOutW(450, 470, ss1);
+			break;
+		}	
+	}
+	else {//不在矩形A、B、D中的情况
+		s1 = "点击无效";
+		dc.TextOutW(point.x, point.y, s1);
+	}
+
+	CView::OnLButtonDown(nFlags, point);
+}
+
+
+void Cexp34View::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	Cexp34Doc* pDoc = GetDocument();
+	int c;
+	CString ss2;
+	CClientDC dc(this);
+	if (point.x > 200 && point.x < 300 && point.y > 250 && point.y < 400) {//在矩形C中右键鼠标的情况	
+		int count = pDoc->count;
+		CString ss2;
+		if (count == 1) {
+			c = pDoc->a + pDoc->b;
+			ss2.Format(_T("%d"), c);
+			dc.TextOutW(point.x, point.y, ss2);
+		}
+		else if (count == 2) {
+			c = pDoc->a - pDoc->b;
+			ss2.Format(_T("%d"), c);
+			dc.TextOutW(point.x, point.y, ss2);
+		}
+		else if (count == 3) {
+			c = pDoc->a * pDoc->b;
+			ss2.Format(_T("%d"), c);
+			dc.TextOutW(point.x, point.y, ss2);
+		}
+		else if (count == 4) {
+			c = pDoc->a / pDoc->b;
+			ss2.Format(_T("%d"), c);
+			dc.TextOutW(point.x, point.y, ss2);
+		}
+		else {     //若没有这个，当在矩形D内点击超过四次，在矩形C中右键无显示
+			c = pDoc->a / pDoc->b;
+			ss2.Format(_T("%d"), c);
+			dc.TextOutW(point.x, point.y, ss2);
+		}
+	}
+
+	CView::OnRButtonDown(nFlags, point);
+}
