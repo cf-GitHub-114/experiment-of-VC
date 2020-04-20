@@ -30,7 +30,24 @@ END_MESSAGE_MAP()
 Cexp33Doc::Cexp33Doc()
 {
 	// TODO: 在此添加一次性构造代码
+	A.left = 0;
+	A.top = 0;
+	A.right = 50;
+	A.bottom = 50;
+	B.left = 100;
+	B.top = 100;
+	B.right = 200;
+	B.bottom = 250;
+	C.left = 300;
+	C.top = 300;
+	C.right = 400;
+	C.bottom = 500;
 
+	/*CRect A(0, 0, 60, 100);//构造矩形A
+	CRect B(100, 100, 200, 250);//构造矩形B
+	CRect C(300, 300, 400, 500);//构造矩形C*/
+	a = rand();//定义一个随机数
+	b = rand();//定义一个随机数
 }
 
 Cexp33Doc::~Cexp33Doc()

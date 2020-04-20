@@ -14,6 +14,8 @@ protected: // 仅从序列化创建
 
 // 特性
 public:
+	CRect A, B, C;//定义三个矩形
+	int a, b;//定义两个整型变量
 
 // 操作
 public:
