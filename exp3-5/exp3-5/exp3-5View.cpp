@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(Cexp35View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp35View, CView)
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // Cexp35View 构造/析构
@@ -29,7 +30,7 @@ END_MESSAGE_MAP()
 Cexp35View::Cexp35View()
 {
 	// TODO: 在此处添加构造代码
-
+	flag = 0;//初始化变量
 }
 
 Cexp35View::~Cexp35View()
@@ -46,7 +47,7 @@ BOOL Cexp35View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp35View 绘制
 
-void Cexp35View::OnDraw(CDC* /*pDC*/)
+void Cexp35View::OnDraw(CDC* pDC)
 {
 	Cexp35Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +55,12 @@ void Cexp35View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	if (flag) {
+		CRect cr;//定义一个矩形来装客户区信息
+	    this->GetClientRect(&cr);//获取客户区信息的函数，是视图类的一个成员函数
+	    pDC->Ellipse(cr);
+	}
+	
 }
 
 
@@ -79,3 +86,16 @@ Cexp35Doc* Cexp35View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp35View 消息处理程序
+
+
+void Cexp35View::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	CRect cr;//定义一个矩形来装客户区信息
+	this->GetClientRect(&cr);//获取客户区信息的函数，是视图类的一个成员函数
+	CClientDC dc(this);
+	dc.Ellipse(cr);//画圆操作
+	flag = 1;//使窗口重绘后进行画圆的操作
+
+	CView::OnLButtonDown(nFlags, point);
+}

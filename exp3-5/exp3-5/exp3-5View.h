@@ -17,6 +17,7 @@ public:
 
 // 操作
 public:
+	int flag;//定义一个整型变量来作为重绘后是否进行画圆的操作
 
 // 重写
 public:
@@ -37,6 +38,8 @@ protected:
 // 生成的消息映射函数
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // exp3-5View.cpp 中的调试版本
