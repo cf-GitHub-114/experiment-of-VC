@@ -69,6 +69,7 @@ artifacts/
 *.svclog
 *.scc
 
+
 # Chutzpah Test files
 _Chutzpah*
 
@@ -243,3 +244,10 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+
+*.ncb
+*.db
+*.sdf
+/**/[Dd]ebug
+/**/ipch/*
