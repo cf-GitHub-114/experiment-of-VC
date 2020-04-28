@@ -29,8 +29,13 @@ END_MESSAGE_MAP()
 
 Cexp42Doc::Cexp42Doc()
 {
-	// TODO: 在此添加一次性构造代码
-
+	// TODO: 在此添加一次性构造代码	CRect A(500, 100, 900, 400);//构造矩形A
+	//CRect A(0,0,200,200);//不可用
+	A.left = 500;//构造矩形A
+	A.top = 100;
+	A.right = 900;
+	A.bottom = 400;
+	
 }
 
 Cexp42Doc::~Cexp42Doc()

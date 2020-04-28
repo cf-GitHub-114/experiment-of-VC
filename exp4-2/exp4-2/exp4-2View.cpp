@@ -22,6 +22,8 @@
 IMPLEMENT_DYNCREATE(Cexp42View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp42View, CView)
+	ON_WM_KEYDOWN()
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // Cexp42View 构造/析构
@@ -29,7 +31,6 @@ END_MESSAGE_MAP()
 Cexp42View::Cexp42View()
 {
 	// TODO: 在此处添加构造代码
-
 }
 
 Cexp42View::~Cexp42View()
@@ -46,7 +47,7 @@ BOOL Cexp42View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp42View 绘制
 
-void Cexp42View::OnDraw(CDC* /*pDC*/)
+void Cexp42View::OnDraw(CDC* pDC)
 {
 	Cexp42Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +55,7 @@ void Cexp42View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	pDC->Rectangle(pDoc->A);
 }
 
 
@@ -79,3 +81,59 @@ Cexp42Doc* Cexp42View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp42View 消息处理程序
+
+
+void Cexp42View::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	Cexp42Doc* pDoc = GetDocument();
+	CRect clientRec;
+	GetClientRect(&clientRec);//获取客户区大小
+	switch (nChar) {
+	case VK_UP:
+		if (pDoc->A.top > 0) {
+			pDoc->A.top -= 5;
+			pDoc->A.bottom -= 5;
+		}break;
+	case VK_DOWN:
+		if (pDoc->A.bottom <= (clientRec.bottom-clientRec.top)) {//保证右下角的点在客户区内
+			pDoc->A.top += 5;
+			pDoc->A.bottom += 5;
+		}break;
+	case VK_LEFT:
+		if (pDoc->A.left > 0) {
+			pDoc->A.left -= 5;
+			pDoc->A.right -= 5;
+		}break;
+	case VK_RIGHT:
+		if (pDoc->A.right <= (clientRec.right - clientRec.left)) {//保证右下角的点在客户区内
+			pDoc->A.right += 5;
+			pDoc->A.left += 5;
+		}break;
+	case VK_HOME:
+		if (pDoc->A.top > 0 && pDoc->A.left > 0) {//保证右下角的点在客户区内
+			pDoc->A.top -= 5;
+			pDoc->A.left -= 5;
+		}break;
+	case VK_END:
+		if (pDoc->A.top > 0 && pDoc->A.left > 0) {//保证右下角的点在客户区内
+			pDoc->A.top += 5;
+			pDoc->A.left += 5;
+		}break;
+	}
+	InvalidateRect(NULL,TRUE);//强制重绘
+	CView::OnKeyDown(nChar, nRepCnt, nFlags);
+}
+
+
+void Cexp42View::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	Cexp42Doc* pDoc = GetDocument();
+	pDoc->A.left = 500;
+	pDoc->A.top = 100;
+	pDoc->A.right = 900;
+	pDoc->A.bottom = 400;
+	InvalidateRect(NULL, TRUE);//强制重绘
+	CView::OnLButtonDown(nFlags, point);
+}
