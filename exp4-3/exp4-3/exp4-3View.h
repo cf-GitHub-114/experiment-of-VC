@@ -14,6 +14,8 @@ protected: // 仅从序列化创建
 // 特性
 public:
 	Cexp43Doc* GetDocument() const;
+	CRect A;//定义一个矩形A，用于装圆形
+	int flag;//定义一个标志圆形上移的的整型变量，若为1，说明在上移，若为0，说明在下移
 
 // 操作
 public:
@@ -37,6 +39,8 @@ protected:
 // 生成的消息映射函数
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
 #ifndef _DEBUG  // exp4-3View.cpp 中的调试版本
