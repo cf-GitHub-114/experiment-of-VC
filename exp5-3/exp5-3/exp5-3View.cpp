@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(Cexp53View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp53View, CView)
+	ON_COMMAND(ID_VIEW_SHOWNAME, &Cexp53View::OnViewShowname)
 END_MESSAGE_MAP()
 
 // Cexp53View 构造/析构
@@ -79,3 +80,12 @@ Cexp53Doc* Cexp53View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp53View 消息处理程序
+
+
+void Cexp53View::OnViewShowname()
+{
+	// TODO: 在此添加命令处理程序代码
+	CString s = _T("陈斐");//定义并初始化字符串
+	CClientDC dc(this);//定义一个CClientDC的对象dc
+	dc.TextOutW(200,300,s);//输出名字字符串
+}
