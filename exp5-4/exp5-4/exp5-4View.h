@@ -14,6 +14,9 @@ protected: // 仅从序列化创建
 // 特性
 public:
 	Cexp54Doc* GetDocument() const;
+	CBitmap m_Bitmap;//构造位图对象
+	int m_width;//构造存储位图宽度的对象
+	int m_height;//构造存储位图高度的对象
 
 // 操作
 public:

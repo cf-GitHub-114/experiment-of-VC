@@ -29,7 +29,11 @@ END_MESSAGE_MAP()
 Cexp54View::Cexp54View()
 {
 	// TODO: 在此处添加构造代码
-
+	BITMAP BM;//构造取图片大小的结构体
+	m_Bitmap.LoadBitmap(IDB_BITMAP1);
+	m_Bitmap.GetBitmap(&BM);
+	m_width = BM.bmWidth;
+	m_height = BM.bmHeight;
 }
 
 Cexp54View::~Cexp54View()
@@ -46,7 +50,7 @@ BOOL Cexp54View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp54View 绘制
 
-void Cexp54View::OnDraw(CDC* /*pDC*/)
+void Cexp54View::OnDraw(CDC* pDC)
 {
 	Cexp54Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +58,10 @@ void Cexp54View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	CDC MemDC;//构造内存DC
+	MemDC.CreateCompatibleDC(NULL);
+	MemDC.SelectObject(m_Bitmap);
+	pDC->BitBlt(0, 0, m_width, m_height, &MemDC, 0, 0, SRCCOPY);
 }
 
 

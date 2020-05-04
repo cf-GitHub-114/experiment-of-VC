@@ -212,6 +212,7 @@
     <None Include="res\exp54.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\1.BMP" />
     <Image Include="res\exp5-4.ico" />
     <Image Include="res\exp5-4Doc.ico" />
     <Image Include="res\Toolbar.bmp" />
