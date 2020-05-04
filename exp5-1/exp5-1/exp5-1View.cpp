@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(Cexp51View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp51View, CView)
+	ON_COMMAND(ID_VIEW_SHOWELLIPSE, &Cexp51View::OnViewShowellipse)
 END_MESSAGE_MAP()
 
 // Cexp51View 构造/析构
@@ -29,7 +30,6 @@ END_MESSAGE_MAP()
 Cexp51View::Cexp51View()
 {
 	// TODO: 在此处添加构造代码
-
 }
 
 Cexp51View::~Cexp51View()
@@ -46,7 +46,7 @@ BOOL Cexp51View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp51View 绘制
 
-void Cexp51View::OnDraw(CDC* /*pDC*/)
+void Cexp51View::OnDraw(CDC* pDC)
 {
 	Cexp51Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -79,3 +79,22 @@ Cexp51Doc* Cexp51View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp51View 消息处理程序
+
+
+void Cexp51View::OnViewShowellipse()
+{
+	// TODO: 在此添加命令处理程序代码
+	CClientDC dc(this);//定义一个CClientDC的对象dc
+	CRect rc;//定义一个矩形对象
+	//CArray<CRect,CRect&>ca;
+	//ca.SetSize(20);
+	GetClientRect(&rc);//获取客户区大小
+	int r = 100;//定义一个整型变量r,为圆形的半径
+	int x = (rc.left + rc.right)/2;//获取客户区中点
+	int y = (rc.top + rc.bottom)/2;
+	for (int i = 0;i < 10;i++) {
+		r -= 10;//先画大的圆，若先画小的圆，会被后面的大圆挡住
+		CRect A(x-r , y-r , x+r , y+r);
+		dc.Ellipse(A);
+	}
+}
