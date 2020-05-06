@@ -54,6 +54,13 @@ void Cexp61View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	CFileDialog cfd(true);  //构造对话框对象
+	int r = cfd.DoModal();  //弹出对话框
+	CClientDC dc(this);
+	if (r == IDOK) {//确定要退出对话框
+		CString filename = cfd.GetPathName();
+		dc.TextOutW(300, 200, filename);
+	}
 }
 
 
