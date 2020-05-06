@@ -14,7 +14,7 @@ protected: // 仅从序列化创建
 // 特性
 public:
 	Cexp64Doc* GetDocument() const;
-
+	CImage img;
 // 操作
 public:
 
