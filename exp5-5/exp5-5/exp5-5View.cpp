@@ -22,6 +22,11 @@
 IMPLEMENT_DYNCREATE(Cexp55View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp55View, CView)
+	ON_COMMAND(ID_VIEW_DRAWLINE, &Cexp55View::OnViewDrawline)
+	ON_COMMAND(ID_VIEW_DRAWRECTANGLE, &Cexp55View::OnViewDrawrectangle)
+	ON_COMMAND(ID_VIEW_DRAWELLIPSE, &Cexp55View::OnViewDrawellipse)
+	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONUP()
 END_MESSAGE_MAP()
 
 // Cexp55View 构造/析构
@@ -29,7 +34,6 @@ END_MESSAGE_MAP()
 Cexp55View::Cexp55View()
 {
 	// TODO: 在此处添加构造代码
-
 }
 
 Cexp55View::~Cexp55View()
@@ -46,7 +50,7 @@ BOOL Cexp55View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp55View 绘制
 
-void Cexp55View::OnDraw(CDC* /*pDC*/)
+void Cexp55View::OnDraw(CDC* pDC)
 {
 	Cexp55Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -79,3 +83,48 @@ Cexp55Doc* Cexp55View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp55View 消息处理程序
+
+
+void Cexp55View::OnViewDrawline()
+{
+	// TODO: 在此添加命令处理程序代码
+	CClientDC dc(this);
+	dc.MoveTo(downPointX, downPointY);
+	dc.LineTo(upPointX, upPointY);//画线
+}
+
+
+void Cexp55View::OnViewDrawrectangle()
+{
+	// TODO: 在此添加命令处理程序代码
+	CClientDC dc(this);
+	CRect rect(downPointX, downPointY, upPointX, upPointY);
+	dc.Rectangle(rect);//画矩形
+}
+
+
+void Cexp55View::OnViewDrawellipse()
+{
+	// TODO: 在此添加命令处理程序代码
+	CClientDC dc(this);
+	CRect rect(downPointX, downPointY, upPointX, upPointY);
+	dc.Ellipse(rect);//画椭圆
+}
+
+
+void Cexp55View::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	downPointX = point.x;
+	downPointY = point.y;
+	CView::OnLButtonDown(nFlags, point);
+}
+
+
+void Cexp55View::OnLButtonUp(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	upPointX = point.x;
+	upPointY = point.y;
+	CView::OnLButtonUp(nFlags, point);
+}

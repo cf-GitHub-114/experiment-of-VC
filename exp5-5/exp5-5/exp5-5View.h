@@ -14,6 +14,7 @@ protected: // 仅从序列化创建
 // 特性
 public:
 	Cexp55Doc* GetDocument() const;
+	int downPointX, downPointY, upPointX, upPointY;//定义点击鼠标和释放鼠标时坐标的整型变量
 
 // 操作
 public:
@@ -37,6 +38,12 @@ protected:
 // 生成的消息映射函数
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnViewDrawline();
+	afx_msg void OnViewDrawrectangle();
+	afx_msg void OnViewDrawellipse();
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // exp5-5View.cpp 中的调试版本
