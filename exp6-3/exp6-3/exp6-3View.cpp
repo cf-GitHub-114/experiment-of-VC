@@ -46,7 +46,7 @@ BOOL Cexp63View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp63View 绘制
 
-void Cexp63View::OnDraw(CDC* /*pDC*/)
+void Cexp63View::OnDraw(CDC* pDC)
 {
 	Cexp63Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +54,21 @@ void Cexp63View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	CFileDialog cfd(true);  //构造对话框对象
+	int r = cfd.DoModal();  //弹出对话框
+	CClientDC dc(this);
+	CRect rect;
+	GetClientRect(rect);
+		if (r == IDOK) {  //如果退出对话框时选项为OK的话
+			{
+				CString filename = cfd.GetPathName();
+				CImage img;
+				img.Load(filename);
+				float x = (rect.Width() - img.GetWidth()) / 2;
+				float y = (rect.Height() - img.GetHeight()) / 2;
+				img.Draw(pDC->m_hDC, x, y, img.GetWidth(), img.GetHeight());
+			}
+		}
 }
 
 
