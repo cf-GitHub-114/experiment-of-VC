@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(Cexp65View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp65View, CView)
+	ON_WM_CHAR()
 END_MESSAGE_MAP()
 
 // Cexp65View 构造/析构
@@ -29,7 +30,11 @@ END_MESSAGE_MAP()
 Cexp65View::Cexp65View()
 {
 	// TODO: 在此处添加构造代码
-
+	s = "";
+	rect.left = 200,
+	rect.top = 300;
+	rect.right = 800;
+	rect.bottom = 350;
 }
 
 Cexp65View::~Cexp65View()
@@ -46,7 +51,7 @@ BOOL Cexp65View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp65View 绘制
 
-void Cexp65View::OnDraw(CDC* /*pDC*/)
+void Cexp65View::OnDraw(CDC* pDC)
 {
 	Cexp65Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +59,7 @@ void Cexp65View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	pDC->Rectangle(rect);
 }
 
 
@@ -79,3 +85,18 @@ Cexp65Doc* Cexp65View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp65View 消息处理程序
+
+
+void Cexp65View::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	CClientDC dc(this);
+	s = s+(char)nChar;
+	CSize txtpot;
+	txtpot = dc.GetTextExtent(s);
+	if(txtpot.cx <= 598){    //txtpot.cx为字符串s的像素长度
+		dc.TextOutW( 201,310, s);
+		
+	}
+	CView::OnChar(nChar, nRepCnt, nFlags);
+}
