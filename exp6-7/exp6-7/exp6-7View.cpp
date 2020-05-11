@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(Cexp67View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp67View, CView)
+	ON_WM_CHAR()
 END_MESSAGE_MAP()
 
 // Cexp67View 构造/析构
@@ -29,7 +30,13 @@ END_MESSAGE_MAP()
 Cexp67View::Cexp67View()
 {
 	// TODO: 在此处添加构造代码
-
+	rect.left = 200;//初始化矩形
+	rect.top = 100;
+	rect.right = 800;
+	rect.bottom = 200;
+	s = "";//初始化字符串
+	x = 201;//初始化输出字符串的横坐标
+	y = 101;//初始化输出字符串的纵坐标
 }
 
 Cexp67View::~Cexp67View()
@@ -46,7 +53,7 @@ BOOL Cexp67View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp67View 绘制
 
-void Cexp67View::OnDraw(CDC* /*pDC*/)
+void Cexp67View::OnDraw(CDC* pDC)
 {
 	Cexp67Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +61,7 @@ void Cexp67View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	pDC->Rectangle(rect);//画矩形
 }
 
 
@@ -79,3 +87,23 @@ Cexp67Doc* Cexp67View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp67View 消息处理程序
+
+
+void Cexp67View::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	CClientDC dc(this);
+	s = s + (char)nChar;
+	size = dc.GetTextExtent(s);//获取字符串的像素长度
+	if (size.cx < 599 ) {//未需要换行
+		dc.TextOutW(x, y, s);
+		}
+	else if (size.cx >= 599 && y < 150){//需要换行，且还在编辑器（矩形内）	
+		size.cx = 0;//将字符串宽度置空
+		s = (char)nChar;//将刚刚输入的字符加入字符串
+		y += 20;//输出字符串的纵坐标增加
+		dc.TextOutW(x, y, s);//输出字符串
+	}
+	
+	CView::OnChar(nChar, nRepCnt, nFlags);
+}
