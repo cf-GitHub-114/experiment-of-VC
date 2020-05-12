@@ -14,7 +14,8 @@ protected: // 仅从序列化创建
 // 特性
 public:
 	Cexp26Doc* GetDocument() const;
-
+	CRect rect;//定义一个矩形
+	int height;
 // 操作
 public:
 

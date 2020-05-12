@@ -29,7 +29,11 @@ END_MESSAGE_MAP()
 Cexp26View::Cexp26View()
 {
 	// TODO: 在此处添加构造代码
-
+	rect.left = 100;//构造矩形
+	rect.top = 100;
+	rect.right = 300;
+	rect.bottom = 400;
+	height = 0;//初始化
 }
 
 Cexp26View::~Cexp26View()
@@ -46,7 +50,7 @@ BOOL Cexp26View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp26View 绘制
 
-void Cexp26View::OnDraw(CDC* /*pDC*/)
+void Cexp26View::OnDraw(CDC* pDC)
 {
 	Cexp26Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +58,19 @@ void Cexp26View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	/*int red = rand();
+	int green = rand();
+	int blue = rand();
+	int width = 2;
+	int row = 10;
+	int color = RGB(red,green,blue);*/
+	int color = RGB(51,5,100);//构造颜色
+	CBrush newBrush(color);
+//载入新画刷，并把旧画刷存入指针
+	CBrush *oldBrush = pDC->SelectObject(&newBrush);
+//绘图代码
+	pDC->Ellipse(rect);//在矩形内画圆
+	pDC->SelectObject(oldBrush);//在使用新画刷后，恢复原画刷
 }
 
 
