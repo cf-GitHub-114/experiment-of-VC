@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(Cexp23View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp23View, CView)
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // Cexp23View 构造/析构
@@ -79,3 +80,14 @@ Cexp23Doc* Cexp23View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp23View 消息处理程序
+
+
+void Cexp23View::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	int r = rand() % 50 + 5;//设置圆的半径,r=5-54
+	CRect cr(point.x - r,point.y - r,point.x + r, point.y + r);//构造画圆的正方形
+	CClientDC dc(this);//定义CClientDC的对象
+	dc.Ellipse(cr);//在正方形内画圆
+	CView::OnLButtonDown(nFlags, point);
+}
