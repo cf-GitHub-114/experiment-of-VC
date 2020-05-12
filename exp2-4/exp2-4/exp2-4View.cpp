@@ -26,6 +26,7 @@ BEGIN_MESSAGE_MAP(Cexp24View, CView)
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // Cexp24View 构造/析构
@@ -33,7 +34,7 @@ END_MESSAGE_MAP()
 Cexp24View::Cexp24View()
 {
 	// TODO: 在此处添加构造代码
-
+	ca.SetSize(256);//初始化数组，为数组设置大小
 }
 
 Cexp24View::~Cexp24View()
@@ -50,7 +51,7 @@ BOOL Cexp24View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp24View 绘制
 
-void Cexp24View::OnDraw(CDC* /*pDC*/)
+void Cexp24View::OnDraw(CDC* pDC)
 {
 	Cexp24Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -58,6 +59,9 @@ void Cexp24View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	for (int i = 0;i < ca.GetSize();i++) {//将数组中的矩形元素依次画出来
+		pDC->Ellipse(ca.GetAt(i));//
+	}
 }
 
 
@@ -102,3 +106,16 @@ Cexp24Doc* Cexp24View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp24View 消息处理程序
+
+
+void Cexp24View::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	int r = rand() % 50 + 5;//设置圆的半径,r=5-54
+	CRect cr(point.x - r, point.y - r, point.x + r, point.y + r);//构造画圆的正方形
+	CClientDC dc(this);//定义CClientDC的对象
+	dc.Ellipse(cr);//在正方形内画圆
+	ca.Add(cr);//将矩形元素添加到数组中
+	this->Invalidate();//强制重绘
+	CView::OnLButtonDown(nFlags, point);
+}
