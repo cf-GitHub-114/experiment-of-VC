@@ -14,7 +14,8 @@ protected: // 仅从序列化创建
 // 特性
 public:
 	Cexp25Doc* GetDocument() const;
-
+	int x;//客户区中心的横坐标
+	int y;//客户区中心的纵坐标
 // 操作
 public:
 

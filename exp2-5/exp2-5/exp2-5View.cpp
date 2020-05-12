@@ -29,7 +29,8 @@ END_MESSAGE_MAP()
 Cexp25View::Cexp25View()
 {
 	// TODO: 在此处添加构造代码
-
+	x = 0;//初始化客户区中心横坐标
+	y = 0;//初始化客户区中心纵坐标
 }
 
 Cexp25View::~Cexp25View()
@@ -46,7 +47,7 @@ BOOL Cexp25View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp25View 绘制
 
-void Cexp25View::OnDraw(CDC* /*pDC*/)
+void Cexp25View::OnDraw(CDC* pDC)
 {
 	Cexp25Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +55,11 @@ void Cexp25View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	CRect rect;//定义一个矩形
+	GetClientRect(rect);//获取客户区的尺寸
+	x = rect.left + rect.right;//计算中点横坐标
+	y = rect.top + rect.bottom;//计算中点纵坐标
+	pDC->Ellipse(rect);//在矩形内画圆
 }
 
 
