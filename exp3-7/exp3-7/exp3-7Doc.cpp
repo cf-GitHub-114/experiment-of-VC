@@ -30,7 +30,7 @@ END_MESSAGE_MAP()
 Cexp37Doc::Cexp37Doc()
 {
 	// TODO: 在此添加一次性构造代码
-
+	ca.SetSize(256);//分配256个空间，每个空间装1个矩形
 }
 
 Cexp37Doc::~Cexp37Doc()

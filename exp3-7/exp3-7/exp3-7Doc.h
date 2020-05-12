@@ -14,6 +14,9 @@ protected: // 仅从序列化创建
 
 // 特性
 public:
+	CArray<CRect, CRect>ca;//定义元素为矩形的数组
+	int width;//矩形的宽度
+	int height;//矩形的高度
 
 // 操作
 public:

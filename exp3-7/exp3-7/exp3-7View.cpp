@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(Cexp37View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp37View, CView)
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // Cexp37View 构造/析构
@@ -46,7 +47,7 @@ BOOL Cexp37View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp37View 绘制
 
-void Cexp37View::OnDraw(CDC* /*pDC*/)
+void Cexp37View::OnDraw(CDC* pDC)
 {
 	Cexp37Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +55,10 @@ void Cexp37View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	for (int i = 0;i < pDoc->ca.GetSize();i++) {
+		pDC->Ellipse(pDoc->ca.GetAt(i));//在矩形中画椭圆
+	}
+
 }
 
 
@@ -79,3 +84,17 @@ Cexp37Doc* Cexp37View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp37View 消息处理程序
+
+
+void Cexp37View::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	Cexp37Doc* pDoc = GetDocument();
+	pDoc->width = rand() % 50 + 5;//5-54
+	pDoc->height = rand() % 50 + 5;
+	CRect rect(point.x - pDoc->width / 2, point.y - pDoc->height / 2, point.x + pDoc->width, point.y + pDoc->height);
+	pDoc->ca.Add(rect);
+	Invalidate();//强制重绘
+
+	CView::OnLButtonDown(nFlags, point);
+}
