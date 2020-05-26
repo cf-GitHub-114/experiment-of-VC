@@ -11,6 +11,7 @@
 
 #include "exp7-2Doc.h"
 #include "exp7-2View.h"
+#include "MyDlg01.h"//添加对话框的头文件
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -54,6 +55,8 @@ void Cexp72View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	MyDlg01 dlg;//构造对话框对象
+	int r = dlg.DoModal();//调用函数，弹出模式对话框
 }
 
 
