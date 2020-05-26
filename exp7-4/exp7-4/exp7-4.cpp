@@ -10,6 +10,7 @@
 
 #include "exp7-4Doc.h"
 #include "exp7-4View.h"
+#include "MyDlg02.h"//添加头文件
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -153,6 +154,8 @@ protected:
 // 实现
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnAdd();
 };
 
 CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
@@ -165,6 +168,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
+	ON_COMMAND(ID_ADD, &CAboutDlg::OnAdd)
 END_MESSAGE_MAP()
 
 // 用于运行对话框的应用程序命令
@@ -177,4 +181,9 @@ void Cexp74App::OnAppAbout()
 // Cexp74App 消息处理程序
 
 
-
+void CAboutDlg::OnAdd()
+{
+	// TODO: 在此添加命令处理程序代码
+	MyDlg02 dlg;//构造类对象
+	int t = dlg.DoModal();//弹出对话框
+}

@@ -11,6 +11,7 @@
 
 #include "exp7-4Doc.h"
 #include "exp7-4View.h"
+#include "MyDlg02.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,6 +23,7 @@
 IMPLEMENT_DYNCREATE(Cexp74View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp74View, CView)
+	ON_COMMAND(ID_VIEW_ADD, &Cexp74View::OnViewAdd)
 END_MESSAGE_MAP()
 
 // Cexp74View 构造/析构
@@ -79,3 +81,11 @@ Cexp74Doc* Cexp74View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp74View 消息处理程序
+
+
+void Cexp74View::OnViewAdd()
+{
+	// TODO: 在此添加命令处理程序代码
+	MyDlg02 dlg;//构造类对象
+	int t = dlg.DoModal();//弹出对话框
+}
