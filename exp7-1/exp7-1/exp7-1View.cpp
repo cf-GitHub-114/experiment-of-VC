@@ -11,6 +11,7 @@
 
 #include "exp7-1Doc.h"
 #include "exp7-1View.h"
+#include "MyDlg00.h"//添加对话框的头文件
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -46,7 +47,7 @@ BOOL Cexp71View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp71View 绘制
 
-void Cexp71View::OnDraw(CDC* /*pDC*/)
+void Cexp71View::OnDraw(CDC* pDC)
 {
 	Cexp71Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +55,12 @@ void Cexp71View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	MyDlg00 dlg;//构造对话框对象
+	int r = dlg.DoModal();//调用函数，弹出模式对话框
+	if (r == IDOK) {//点击退出对话框
+		CString s = _T("你已退出对话框");
+		pDC->TextOutW(200,300,s);//输出字符串
+	}
 }
 
 

@@ -189,6 +189,7 @@
     <ClInclude Include="exp7-1Doc.h" />
     <ClInclude Include="exp7-1View.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MyDlg00.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="exp7-1Doc.cpp" />
     <ClCompile Include="exp7-1View.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MyDlg00.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
