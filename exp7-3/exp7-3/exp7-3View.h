@@ -17,6 +17,11 @@ public:
 
 // 操作
 public:
+	int downX, downY;//定义变量用于存放鼠标左键点击时的坐标
+	int moveX, moveY;//记录鼠标左键点击到释放移动的距离
+	CRect rect;//定义一个矩形
+	int flag;//定义一个标志鼠标左键点击的标志
+	int left, top, right, bottom;
 
 // 重写
 public:
@@ -37,6 +42,10 @@ protected:
 // 生成的消息映射函数
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // exp7-3View.cpp 中的调试版本
