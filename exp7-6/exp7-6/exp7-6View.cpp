@@ -11,6 +11,7 @@
 
 #include "exp7-6Doc.h"
 #include "exp7-6View.h"
+#include "MyDlg03.h"//添加对话框的头文件
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,6 +23,7 @@
 IMPLEMENT_DYNCREATE(Cexp76View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp76View, CView)
+	ON_BN_CLICKED(IDC_BUTTON1, &Cexp76View::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 // Cexp76View 构造/析构
@@ -54,6 +56,8 @@ void Cexp76View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	MyDlg03 dlg;//构造对话框对象
+	int r = dlg.DoModal();//调用函数，弹出模式对话框
 }
 
 
@@ -79,3 +83,10 @@ Cexp76Doc* Cexp76View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp76View 消息处理程序
+
+
+void Cexp76View::OnBnClickedButton1()
+{
+	// TODO: 在此添加控件通知处理程序代码
+
+}
