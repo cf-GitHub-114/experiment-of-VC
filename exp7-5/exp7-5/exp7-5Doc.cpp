@@ -30,7 +30,8 @@ END_MESSAGE_MAP()
 Cexp75Doc::Cexp75Doc()
 {
 	// TODO: 在此添加一次性构造代码
-
+	x = 0;//初始化变量
+	y = 0;
 }
 
 Cexp75Doc::~Cexp75Doc()

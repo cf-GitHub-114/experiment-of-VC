@@ -17,7 +17,13 @@ public:
 
 // 操作
 public:
-
+	CRect rect;//定义一个画圆的矩形
+	CRect cr;//定义一个装客户区大小的矩形
+	bool set;//开关
+	int r;//定义圆心的半径
+	int flag;//定义标志圆形运动状态的标志
+	int flagD;//定义标志鼠标左键点击的标志
+	int flagDB;//定义一个鼠标左键双击的标志
 // 重写
 public:
 	virtual void OnDraw(CDC* pDC);  // 重写以绘制该视图
@@ -37,6 +43,10 @@ protected:
 // 生成的消息映射函数
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
 #ifndef _DEBUG  // exp7-5View.cpp 中的调试版本

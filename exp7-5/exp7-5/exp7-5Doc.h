@@ -17,6 +17,7 @@ public:
 
 // 操作
 public:
+	int x, y;//客户区中点坐标
 
 // 重写
 public:
