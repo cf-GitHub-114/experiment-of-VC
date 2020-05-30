@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(Cexp81View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp81View, CView)
+	ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
 // Cexp81View 构造/析构
@@ -79,3 +80,17 @@ Cexp81Doc* Cexp81View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp81View 消息处理程序
+
+
+void Cexp81View::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	CFileDialog cfd(true);//构造对话框
+	int r = cfd.DoModal();//弹出模式对话框
+	CClientDC dc(this);
+	if (r == IDOK) {//确定退出对话框
+		CString filename = cfd.GetPathName();
+		dc.TextOutW(200, 300, filename);
+	}
+	CView::OnLButtonDblClk(nFlags, point);
+}
