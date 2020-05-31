@@ -17,6 +17,10 @@ public:
 
 // 操作
 public:
+	CArray<CRect,CRect>ca;//定义以矩形为元素的数组
+	int downX, downY;//定义装鼠标左键点击时坐标的变量
+	int flag;//定义标志鼠标左键点击的标志
+	CRect rect;
 
 // 重写
 public:
@@ -37,6 +41,10 @@ protected:
 // 生成的消息映射函数
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // exp8-3View.cpp 中的调试版本
