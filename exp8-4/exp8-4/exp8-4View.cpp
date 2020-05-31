@@ -11,6 +11,7 @@
 
 #include "exp8-4Doc.h"
 #include "exp8-4View.h"
+#include "MyDlg05.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,6 +23,7 @@
 IMPLEMENT_DYNCREATE(Cexp84View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp84View, CView)
+	ON_COMMAND(ID_DRAWELLIPSE, &Cexp84View::OnDrawellipse)
 END_MESSAGE_MAP()
 
 // Cexp84View 构造/析构
@@ -46,7 +48,7 @@ BOOL Cexp84View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp84View 绘制
 
-void Cexp84View::OnDraw(CDC* /*pDC*/)
+void Cexp84View::OnDraw(CDC* pDC)
 {
 	Cexp84Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +56,7 @@ void Cexp84View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	pDC->Ellipse(rect);
 }
 
 
@@ -79,3 +82,19 @@ Cexp84Doc* Cexp84View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp84View 消息处理程序
+
+
+void Cexp84View::OnDrawellipse()
+{
+	// TODO: 在此添加命令处理程序代码
+	MyDlg05 dlg;
+	int r = dlg.DoModal();
+	if (r == IDOK) {
+		this->UpdateData(true);//将前台数据传到后台
+		rect.left = dlg.left;
+		rect.top = dlg.top;
+		rect.right = dlg.right;
+		rect.bottom = dlg.bottom;
+		Invalidate();//强制重绘
+	}
+}

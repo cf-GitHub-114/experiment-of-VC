@@ -17,6 +17,7 @@ public:
 
 // 操作
 public:
+	CRect rect;//定义一个画椭圆的矩形
 
 // 重写
 public:
@@ -37,6 +38,8 @@ protected:
 // 生成的消息映射函数
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnDrawellipse();
 };
 
 #ifndef _DEBUG  // exp8-4View.cpp 中的调试版本
