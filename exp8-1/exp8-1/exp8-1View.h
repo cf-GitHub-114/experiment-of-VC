@@ -17,6 +17,8 @@ public:
 
 // 操作
 public:
+	CString filename;//定义一个装文件名的变量
+	int flag;// 定义一个标志已经获得文件名的变量
 
 // 重写
 public:
@@ -37,6 +39,9 @@ protected:
 // 生成的消息映射函数
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
+	afx_msg void OnShowfilename();
 };
 
 #ifndef _DEBUG  // exp8-1View.cpp 中的调试版本

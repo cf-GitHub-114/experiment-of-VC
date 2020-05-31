@@ -11,6 +11,8 @@
 
 #include "exp8-1Doc.h"
 #include "exp8-1View.h"
+#include "MyDlg04.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,6 +24,8 @@
 IMPLEMENT_DYNCREATE(Cexp81View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp81View, CView)
+	ON_WM_LBUTTONDBLCLK()
+	ON_COMMAND(ID_SHOWFILENAME, &Cexp81View::OnShowfilename)
 END_MESSAGE_MAP()
 
 // Cexp81View 构造/析构
@@ -29,7 +33,7 @@ END_MESSAGE_MAP()
 Cexp81View::Cexp81View()
 {
 	// TODO: 在此处添加构造代码
-
+	flag = 0;//初始化标志
 }
 
 Cexp81View::~Cexp81View()
@@ -79,3 +83,31 @@ Cexp81Doc* Cexp81View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp81View 消息处理程序
+
+
+void Cexp81View::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	CFileDialog cfd(true);//构造对话框
+	int r = cfd.DoModal();//弹出模式对话框
+	CClientDC dc(this);
+	if (r == IDOK) {//确定退出对话框
+		filename = cfd.GetPathName();
+		flag = 1;
+		dc.TextOutW(200, 300, filename);
+	}
+
+	CView::OnLButtonDblClk(nFlags, point);
+}
+
+
+void Cexp81View::OnShowfilename()
+{
+	// TODO: 在此添加命令处理程序代码
+	if (flag == 1) {
+		MyDlg04 dlg;
+	    dlg.showname = filename;//先传数据再弹出对话框
+	    int t = dlg.DoModal();
+	    UpdateData(false);//将后台数据传到前台
+	}
+}
