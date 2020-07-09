@@ -30,7 +30,7 @@ END_MESSAGE_MAP()
 Cexp91Doc::Cexp91Doc()
 {
 	// TODO: 在此添加一次性构造代码
-
+	filename = "";//初始化读取的文件名字符串
 }
 
 Cexp91Doc::~Cexp91Doc()
@@ -58,10 +58,12 @@ void Cexp91Doc::Serialize(CArchive& ar)
 	if (ar.IsStoring())
 	{
 		// TODO: 在此添加存储代码
+		ar << filename;
 	}
 	else
 	{
 		// TODO: 在此添加加载代码
+		ar >> filename;
 	}
 }
 

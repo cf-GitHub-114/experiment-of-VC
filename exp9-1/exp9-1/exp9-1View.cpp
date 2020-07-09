@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(Cexp91View, CView)
 
 BEGIN_MESSAGE_MAP(Cexp91View, CView)
+	ON_COMMAND(ID_VIEW_GETNAME, &Cexp91View::OnViewGetname)
 END_MESSAGE_MAP()
 
 // Cexp91View 构造/析构
@@ -46,7 +47,7 @@ BOOL Cexp91View::PreCreateWindow(CREATESTRUCT& cs)
 
 // Cexp91View 绘制
 
-void Cexp91View::OnDraw(CDC* /*pDC*/)
+void Cexp91View::OnDraw(CDC* pDC)
 {
 	Cexp91Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -54,6 +55,7 @@ void Cexp91View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 在此处为本机数据添加绘制代码
+	pDC->TextOutW(200,300,pDoc->filename);
 }
 
 
@@ -79,3 +81,16 @@ Cexp91Doc* Cexp91View::GetDocument() const // 非调试版本是内联的
 
 
 // Cexp91View 消息处理程序
+
+
+void Cexp91View::OnViewGetname()
+{
+	// TODO: 在此添加命令处理程序代码
+	Cexp91Doc* pDoc = GetDocument();
+	CFileDialog cfd(true);
+	int r = cfd.DoModal();
+	if (r == IDOK) {
+		pDoc->filename = cfd.GetPathName();
+	}
+	Invalidate();
+}

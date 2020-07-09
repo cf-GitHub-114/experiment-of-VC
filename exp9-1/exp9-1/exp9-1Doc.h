@@ -14,6 +14,7 @@ protected: // 仅从序列化创建
 
 // 特性
 public:
+	CString filename;//用于装读取到的文件名
 
 // 操作
 public:
