@@ -6,6 +6,9 @@
 #include "exp9-3.h"
 #include "exp9-3Dlg.h"
 #include "afxdialogex.h"
+#include<fstream>
+#include<string>
+using namespace std;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -51,6 +54,7 @@ END_MESSAGE_MAP()
 
 Cexp93Dlg::Cexp93Dlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_EXP93_DIALOG, pParent)
+	, boxName(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -58,12 +62,19 @@ Cexp93Dlg::Cexp93Dlg(CWnd* pParent /*=NULL*/)
 void Cexp93Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST1, listBox);
+	DDX_Text(pDX, IDC_EDIT1, boxName);
+	DDX_Control(pDX, IDC_EDIT1, showName);
+	DDX_Control(pDX, IDC_EDIT1, showName);
+	DDX_Control(pDX, IDC_LIST1, listBox);
 }
 
 BEGIN_MESSAGE_MAP(Cexp93Dlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_COMMAND(IDD_EXP93_DIALOG, &Cexp93Dlg::OnIddExp93Dialog)
+	ON_LBN_SELCHANGE(IDC_LIST1, &Cexp93Dlg::OnLbnSelchangeList1)
 END_MESSAGE_MAP()
 
 
@@ -99,6 +110,18 @@ BOOL Cexp93Dlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
 	// TODO: 在此添加额外的初始化代码
+	showName.SetWindowText(_T("aaa"));
+	ca.SetSize(100);           //初始化数组大小
+	ifstream ifs(_T("G:\\4.大二\\下册\\VC\\homework\\experiments-of-VC\\exp9-3\\学生名单.txt"));
+	string s;
+	int i = 0;
+	while (ifs >> s)
+	{
+		CString name;
+		name = s.c_str();
+		listBox.InsertString(-1, name);
+		ca.SetAt(i++, name);
+	}
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -152,3 +175,37 @@ HCURSOR Cexp93Dlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void Cexp93Dlg::OnIddExp93Dialog()
+{
+	// TODO: 在此添加命令处理程序代码
+	  /*int n = listBox.GetCurSel();
+	if (n) {
+		showName.SetWindowText(ca[n].GetString());
+	}
+  int n = listBox.GetCurSel();
+	boxName = ca[n].GetString();
+	boxName = "iodfoerif";
+	//boxName = listBox.SelectItem.Text();
+		
+listBox.InsertString(n, boxName);
+	count = listBox.GetCount();
+	ofstream ofs(_T("G:\4.大二\\下册\\VC\\homework\\experiments-of-VC\\exp9-3\\学生名单.txt"));
+	for (int i = 0; i < count; i++)
+	{
+		ofs << CT2A(ca[i].GetString()) << endl;
+	}*/
+}
+
+
+void Cexp93Dlg::OnLbnSelchangeList1()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	//CString select = listBox.SelectedValue();
+	/*int n = listBox.GetCurSel();
+	if (n) {
+		boxName = ca[n].GetString();
+	}*/
+	
+}
