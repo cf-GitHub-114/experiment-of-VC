@@ -6,6 +6,9 @@
 #include "exp9-2.h"
 #include "exp9-2Dlg.h"
 #include "afxdialogex.h"
+#include<fstream>
+#include<string>
+using namespace std;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -64,6 +67,7 @@ BEGIN_MESSAGE_MAP(Cexp92Dlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BUTTON1, &Cexp92Dlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -152,3 +156,54 @@ HCURSOR Cexp92Dlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void Cexp92Dlg::OnBnClickedButton1()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	fstream ifs(_T("C:\\Users\\吃饭\\Desktop\\abc.txt"));
+	string s;
+	ifs >> s;                          //读取文件abc.txt,将其文件内容（保存下来的jpg文件路径）写入到s
+	CImage img;
+	CString filename;
+	filename = s.c_str();
+	CClientDC dc(this);
+	dc.TextOutW(0,0,filename);
+	img.Load(filename);
+	if (!img.IsNull())
+	{
+		int x, y, w, h;
+		foo(img, x, y, w, h);
+		CDC *pDC = GetDlgItem(IDC_STATIC)->GetDC();
+		pDC->SetStretchBltMode(HALFTONE);      //图像不失真
+		img.Draw(pDC->m_hDC, x, y, w, h);
+		ReleaseDC(pDC);
+	}
+	else
+	{
+		MessageBox(_T("Load Error"));
+	}
+}
+
+
+void Cexp92Dlg::foo(CImage &img, int &x, int &y, int &w, int &h)
+{
+	CRect rect;
+	GetDlgItem(IDC_STATIC)->GetClientRect(&rect);            //获取客户区
+	float rect_ratio = 1.0*rect.Width() / rect.Height();     //计算客户区的宽高比
+	float img_ratio = 1.0*img.GetWidth() / img.GetHeight();   //计算图片的宽高比
+	if (rect_ratio > img_ratio)                             //如果客户区宽高比更大（同样高度时图片控件更宽）
+	{
+		h = rect.Height();                                 //以客户区高度为高度
+		w = img_ratio*h;                                   //按比例缩放图片的宽度
+		x = (rect.Width() - w) / 2;                      //左上角坐标计算
+		y = 0;                                          //相对于客户区来讲   y=0
+	}
+	else
+	{
+		w = rect.Width();                             //以客户区宽度为宽度
+		h = w / img_ratio;                             //按比例缩放图片的高度
+		x = 0;                                     //相对于客户区来讲   x=0
+		y = (rect.Height() - h) / 2;                //左上角坐标计算
+	}
+}
